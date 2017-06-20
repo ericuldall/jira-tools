@@ -1,6 +1,6 @@
 {
   "name": "jira-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI for automating multi step redundant process in JIRA",
   "main": "index.js",
   "scripts": {
