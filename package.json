@@ -17,5 +17,14 @@
     "moment": "^2.18.1",
     "request": "^2.81.0",
     "termoil": "^1.1.5"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericuldall/jira-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericuldall/jira-tools/issues"
+  },
+  "homepage": "https://github.com/ericuldall/jira-tools#readme"
 }
