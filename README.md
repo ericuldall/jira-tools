@@ -22,8 +22,8 @@ jtools -p [PROJECT] realease get --all
 
 ## Commands
 
-auth
-release
+- auth
+- release
 
 
 More docs coming soon...
