@@ -1,0 +1,30 @@
+{
+	"jtools": {
+		"auth": {
+			"user": false,
+			"password": false
+		},
+		"api": {
+			"url": "https://jira.atlassian.net",
+			"path": "/rest/api/",
+			"version": "2"
+		},
+		"prompt": {
+			"auth": [
+				[{
+					"type": "input",
+					"name": "authUser",
+					"message": "Enter JIRA Username"
+				},{
+					"type": "password",
+					"name": "authPass",
+					"message": "Enter JIRA Password"
+				},{
+					"type": "input",
+					"name": "authUrl",
+					"message": "Enter your JIRA url"
+				}]
+			]
+		}
+	}
+}

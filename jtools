@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+process.env.NODE_CONFIG_DIR = __dirname + '/config';
+var Termoil = require('termoil');
+
+var jtools = new Termoil;
+
+jtools.name('jtools');
+jtools.instructions('jtools [options] [subroutine]');
+jtools.addVersion(new Termoil.Version('1.0', true));
+jtools.addOption(new Termoil.Option(['-p', '-P', '--project'], 'project', new Termoil.Option.Type('value', true), 'Jira Project Key', '', function(val){ return val.toUpperCase(); }));
+
+jtools.addSubRoutine(new Termoil.SubRoutine(['auth'], 'auth', require('./subroutines/Auth')));
+jtools.addSubRoutine(new Termoil.SubRoutine(['release'], 'release', require('./subroutines/Release')));
+
+jtools.parse(Termoil.Skip(process.argv, 2));

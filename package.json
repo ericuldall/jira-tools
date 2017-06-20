@@ -1,0 +1,21 @@
+{
+  "name": "jira-tools",
+  "version": "1.0.0",
+  "description": "CLI for automating multi step redundant process in JIRA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "jtools": "./jtools"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.26.1",
+    "inquirer": "^3.1.1",
+    "moment": "^2.18.1",
+    "request": "^2.81.0",
+    "termoil": "^1.1.5"
+  }
+}

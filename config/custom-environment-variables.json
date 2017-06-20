@@ -1,0 +1,12 @@
+{
+	"jtools": {
+		"auth": {
+			"user": "JTOOLS_AUTH_USER",
+			"password": "JTOOLS_AUTH_PASSWORD"
+		},
+		"api": {
+			"url": "JTOOLS_API_URL",
+			"version": "JTOOLS_API_VERSION"
+		}
+	}
+}
