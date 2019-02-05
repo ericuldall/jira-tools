@@ -19,7 +19,7 @@ ReleaseGet.addOption(new Termoil.Option(['--all'], 'allReleases', new Termoil.Op
 ReleaseGet.on('parsed', function(){
 	var allReleases = this.get('allReleases');
 	var releaseName = this.get('releaseName');
-	getReleases(this.get('project'), allReleases, releaseName, function(json){
+	getReleases(this.get('project'), allReleases, releaseName).then(function(json){
 		process.stdout.write(JSON.stringify(json));
 	});
 });
@@ -32,7 +32,7 @@ ReleaseCreate.addOption(new Termoil.Option(['-b', '-B', '--body'], 'releaseBody'
 
 ReleaseCreate.on('parsed', function(){
 	var postBody = this.get('releaseBody');
-	createRelease(this.get('project'), postBody, function(json){
+	createRelease(this.get('project'), postBody).then(function(json){
 		process.stdout.write(JSON.stringify(json));
 	});
 });
@@ -50,7 +50,7 @@ ReleaseRollWeekly.on('parsed', function(){
 	var project = this.get('project');
 	var releaseNames = this.get('releaseName').map(n => n + ' ' + this.get('startDate'));
 	var complete = 0.0;
-	getReleases(project, false, releaseNames, function(json){
+	getReleases(project, false, releaseNames).then(function(json){
 		var l = json.length;
 		for(var i=0; i<l; i++){
 			var release_id = json[i].id;
@@ -62,9 +62,9 @@ ReleaseRollWeekly.on('parsed', function(){
 				createRelease(project, {
 					name: release_name,
 					releaseDate: release_next_start.add({days: 4}).format("YYYY-MM-DD")
-				}, function(json){
+				}).then(function(json){
 					creates.push(json);
-					updateRelease(release_id, {released: true, moveUnfixedIssuesTo: json.id}, function(json){
+					updateRelease(release_id, {released: true, moveUnfixedIssuesTo: json.id}).then(function(json){
 						updates.push(json);
 						complete += 1;
 						if( complete == l ){
@@ -88,9 +88,9 @@ Release.addSubRoutine(new Termoil.SubRoutine(['roll-weekly'], 'roll-weekly', Rel
 
 module.exports = Release;
 
-function getReleases(project, allReleases, releaseNames, cb){
-	var versions = [];
-	Jira.getVersions(project, function(json){
+function getReleases(project, allReleases, releaseNames){
+	return Jira.getVersions(project).then(function(json){
+		const versions = [];
 		if( allReleases === true ){
 			versions = json;
 		}else{
@@ -100,17 +100,17 @@ function getReleases(project, allReleases, releaseNames, cb){
 				}
 			}
 		}
-		cb(versions);
+		return versions;
 	});
 }
 
-function createRelease(project, postBody, cb){
+function createRelease(project, postBody){
 	postBody.project = project;
-	Jira.createVersion(postBody, cb);
+	return Jira.createVersion(postBody);
 }
 
-function updateRelease(id, postBody, cb){
-	Jira.updateVersion(id, postBody, cb);
+function updateRelease(id, postBody){
+	return Jira.updateVersion(id, postBody);
 }
 
 function filterReleaseNames(v){

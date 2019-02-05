@@ -4,26 +4,32 @@ var API = require('./API');
 
 class Jira {
 
-	static getVersions(project, cb){
-		API.call({
+	static getVersions(project){
+		return API.call({
 			path: '/project/' + project + '/versions',
-		}, cb);
+		});
 	}
 
-	static createVersion(body, cb){
-		API.call({
+	static createVersion(body){
+		return API.call({
 			path: '/version',
 			body: body,
 			method: 'POST'
-		}, cb);
+		});
 	}
 
-	static updateVersion(id, body, cb){
-		API.call({
+	static updateVersion(id, body){
+		return API.call({
 			path: '/version/' + id,
 			body: body,
 			method: 'PUT'
-		}, cb);
+		});
+	}
+
+	static getIssues(jql){
+		return API.call({
+			path: '/search?jql=' + jql
+		});
 	}
 
 }

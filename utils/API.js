@@ -15,7 +15,7 @@ class API {
 		}
 	}
 
-	static call(opts, cb){
+	static call(opts){
 		var url = config.jtools.api.url + config.jtools.api.path + config.jtools.api.version + opts.path;
 		var req_opts = {
 			url: url,
@@ -28,15 +28,17 @@ class API {
 		if( opts.body ){
 			req_opts.body = JSON.stringify(opts.body);
 		}
-		request(req_opts, function(err, res, body){
-			if( err ){
-				throw new Error('JTOOLS API ERROR: ' + err);
-			}
-			var json = JSON.parse(body);
-			if( json.hasOwnProperty('errorMessages') ){
-				throw new Error(json.errorMessages.join("\n"));
-			}
-			cb(JSON.parse(body));
+		return new Promise(function(resolve, reject) {
+			request(req_opts, function(err, res, body){
+				if( err ){
+					throw new Error('JTOOLS API ERROR: ' + err);
+				}
+				var json = JSON.parse(body);
+				if( json.hasOwnProperty('errorMessages') ){
+					throw new Error(json.errorMessages.join("\n"));
+				}
+				resolve(JSON.parse(body));
+			});
 		});
 	}
 }

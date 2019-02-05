@@ -1,1 +1,1 @@
-console.log('Run `jtools` from command line!');
+module.exports = require('./utils/Jira');
