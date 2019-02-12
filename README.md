@@ -33,6 +33,7 @@ npm install --save jira-tools
 ```
 
 *CONFIGURE*
+
 Create the following 2 files...
 
 *config/custom-environment-variables.json*
@@ -64,6 +65,7 @@ config/default.json
 ```
 
 *AUTHENTICATE*
+
 You can authenticate using the cli method above, or you can simply set the following env vars
 1. JTOOLS_AUTH_USER=[JIRA_EMAIL]
 2. JTOOLS_AUTH_PASSWORD=[base64(JIRA_PASSWORD)]
