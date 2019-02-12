@@ -3,7 +3,7 @@
 JIRA Tools is a cli tool and library that allows you to perform actions against your JIRA projects via your command line or node.js scripts.
 
 
-## Getting Started CLI
+# Getting Started CLI
 
 *INSTALL*
 ```
@@ -26,7 +26,7 @@ jtools -p [PROJECT] realease get --all
 - release
 
 
-## Getting Starts Library
+# Getting Started Library
 *INSTALL*
 ```
 npm install --save jira-tools
