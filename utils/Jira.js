@@ -1,37 +1,66 @@
 'use strict';
 
-var API = require('./API');
+const util = require('util');
+const qs  = require('querystring');
+const API = require('./API');
 
 class Jira {
 
-	static getVersions(project){
+	static getVersions (project) {
 		return API.call({
-			path: '/project/' + project + '/versions',
+			path: util.format('/project/%s/versions', project),
 		});
 	}
 
-	static createVersion(body){
+	static createVersion (body) {
 		return API.call({
 			path: '/version',
-			body: body,
+			body,
 			method: 'POST'
 		});
 	}
 
-	static updateVersion(id, body){
+	static updateVersion (id, body) {
 		return API.call({
-			path: '/version/' + id,
-			body: body,
+			path: util.format('/version/%s', id),
+			body,
 			method: 'PUT'
 		});
 	}
 
-	static getIssues(jql){
+	static getIssues (opts) {
 		return API.call({
-			path: '/search?jql=' + jql
+			path: util.format('/search?%s', qs.stringify(opts))
 		});
 	}
 
+	static updateIssue (id, body) {
+		return API.call({
+			path: util.format('/issue/%s', id),
+			body,
+			method: 'PUT' 
+		});
+	}
+	
+	static transitionIssue (id, body) {
+		return API.call({
+			path: util.format('/issue/%s/transitions', id),
+			body,
+			method: 'POST' 
+		});
+	}
+
+	static getIssueTransitions (id) {
+		return API.call({
+			path: util.format('/issue/%s/transitions', id)
+		});
+	}
+
+	static getUser (id) {
+		return API.call({
+			path: util.format('/user?accountId=%s', id)
+		});
+	}
 }
 
 module.exports = Jira;

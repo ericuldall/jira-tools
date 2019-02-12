@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('config');
-var request= require('request');
+var request= require('request-promise');
 
 class API {
 
@@ -23,21 +23,31 @@ class API {
 			method: opts.method || 'GET',
 			headers: {
 				'Content-Type': 'application/json'
-			}
+			},
+      resolveWithFullResponse: true
 		};
 		if( opts.body ){
 			req_opts.body = JSON.stringify(opts.body);
 		}
-		return new Promise(function(resolve, reject) {
-			request(req_opts, function(err, res, body){
-				if( err ){
-					throw new Error('JTOOLS API ERROR: ' + err);
+		return Promise.resolve().then(() => {
+			return request(req_opts).then(res => {
+				let json;
+				try {
+					json = JSON.parse(res.body);
+				} catch(e) {
+					if (res.statusCode >= 400) {
+						throw new Error('Invalid response(' + res.statusCode + ')!');
+					} else {
+						json = {success: true}
+					}
 				}
-				var json = JSON.parse(body);
-				if( json.hasOwnProperty('errorMessages') ){
+				if( json.hasOwnProperty('errorMessages') && json.errorMessages.length ){
 					throw new Error(json.errorMessages.join("\n"));
 				}
-				resolve(JSON.parse(body));
+				if( json.hasOwnProperty('errors') ) {
+					throw new Error(JSON.stringify(json.errors));
+				}
+				return json;
 			});
 		});
 	}
