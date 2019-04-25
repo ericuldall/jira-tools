@@ -42,7 +42,7 @@ Create the following 2 files...
   "jtools": {
     "auth": {
       "user": "JTOOLS_AUTH_USER",
-      "password": "JTOOLS_AUTH_PASSWORD"
+      "token": "JTOOLS_AUTH_TOKEN"
     },
     "api": {
       "url": "JTOOLS_API_URL",
@@ -68,7 +68,7 @@ config/default.json
 
 You can authenticate using the cli method above, or you can simply set the following env vars
 1. JTOOLS_AUTH_USER=[JIRA_EMAIL]
-2. JTOOLS_AUTH_PASSWORD=[base64(JIRA_PASSWORD)]
+2. JTOOLS_AUTH_TOKEN=[base64(JIRA_API_TOKEN)]
 3. JTOOLS_API_URL=https://[YOUR_SUBDOMAIN].atlassian.net
 4. (optional) JTOOLS_API_VERSION=3 (default: 2) - You can also change the default in default.json instead
 
