@@ -6,12 +6,12 @@ var request= require('request-promise');
 class API {
 
 	static getAuth(){
-		if( config.jtools.auth.user === false || config.jtools.auth.password === false ){
+		if( config.jtools.auth.user === false || config.jtools.auth.token === false ){
 			throw new Error('JTOOLS ERROR: Please authenticate!');
 		}
 		return {
 			user: config.jtools.auth.user.trim(),
-			pass: new Buffer(config.jtools.auth.password, 'base64').toString('ascii').trim()
+			pass: new Buffer(config.jtools.auth.token, 'base64').toString('ascii').trim()
 		}
 	}
 

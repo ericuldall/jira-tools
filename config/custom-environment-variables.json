@@ -2,7 +2,7 @@
 	"jtools": {
 		"auth": {
 			"user": "JTOOLS_AUTH_USER",
-			"password": "JTOOLS_AUTH_PASSWORD"
+			"token": "JTOOLS_AUTH_TOKEN"
 		},
 		"api": {
 			"url": "JTOOLS_API_URL",

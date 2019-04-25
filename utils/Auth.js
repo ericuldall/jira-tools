@@ -17,9 +17,9 @@ class Auth {
 		var env_file = fs.writeFileSync(
 			os.homedir() + "/.jtools", 
 			util.format(
-				'export JTOOLS_AUTH_USER="%s"\nexport JTOOLS_AUTH_PASSWORD="%s"\nexport JTOOLS_API_URL="%s"',
+				'export JTOOLS_AUTH_USER="%s"\nexport JTOOLS_AUTH_TOKEN="%s"\nexport JTOOLS_API_URL="%s"',
 				opts.authUser, 
-				new Buffer(opts.authPass).toString("base64"),
+				new Buffer(opts.authToken).toString("base64"),
 				opts.authUrl
 			)
 		);

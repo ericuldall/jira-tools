@@ -2,7 +2,7 @@
 	"jtools": {
 		"auth": {
 			"user": false,
-			"password": false
+			"token": false
 		},
 		"api": {
 			"url": "https://jira.atlassian.net",
@@ -17,8 +17,8 @@
 					"message": "Enter JIRA Username"
 				},{
 					"type": "password",
-					"name": "authPass",
-					"message": "Enter JIRA Password"
+					"name": "authToken",
+					"message": "Enter JIRA API Token"
 				},{
 					"type": "input",
 					"name": "authUrl",
